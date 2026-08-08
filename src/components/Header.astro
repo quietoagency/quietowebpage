@@ -1,0 +1,52 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<div class="fixed top-0 left-0 right-0 z-50 flex flex-col animate-rise-fast">
+  <nav
+    id="q-nav"
+    class="flex items-center justify-between mx-auto w-full max-w-content box-border border border-transparent py-7 px-content-x opacity-95 transition-all duration-calm ease-in-out motion-reduce:transition-none"
+  >
+    <Logo withWordmark mode="light" />
+    <div class="flex gap-nav-gap text-sm font-medium">
+      <a
+        href="#servicios"
+        class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
+        >servicios</a
+      >
+      <a
+        href="#trabajo"
+        class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
+        >trabajo</a
+      >
+      <a
+        href="#contacto"
+        class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
+        >contacto</a
+      >
+    </div>
+  </nav>
+</div>
+
+<script>
+  const nav = document.getElementById("q-nav");
+  if (nav) {
+    const island = [
+      "max-w-nav-island",
+      "rounded-2xl",
+      "mt-1.5",
+      "py-4",
+      "bg-foam-500/94",
+      "backdrop-blur-nav",
+      "border-fog-200",
+    ];
+    const base = ["max-w-content", "mt-0", "py-7", "border-transparent"];
+    const setIsland = (on: boolean) => {
+      nav.classList.remove(...(on ? base : island));
+      nav.classList.add(...(on ? island : base));
+    };
+    const onScroll = () => setIsland(window.scrollY > 48);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+</script>

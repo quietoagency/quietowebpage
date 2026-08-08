@@ -1,1 +1,8 @@
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700&f[]=sentient@400,500&f[]=general-sans@400,500,600&display=swap");
 @import "tailwindcss";
+
+@import "./tokens/colors.css";
+@import "./tokens/fonts.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/motion.css";

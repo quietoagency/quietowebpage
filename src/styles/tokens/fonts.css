@@ -1,0 +1,9 @@
+@theme {
+  --font-wordmark: "Cabinet Grotesk", sans-serif;
+
+  --font-display: "Sentient", serif;
+
+  --font-sans: "General Sans", sans-serif;
+
+  --tracking-wordmark: -0.015em;
+}

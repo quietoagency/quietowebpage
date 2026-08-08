@@ -1,0 +1,10 @@
+@theme {
+  /* tamaños de contenedor — sin equivalente nativo */
+  --container-content: 1120px;
+  --container-narrow: 640px;
+  --container-nav-island: min(720px, calc(100% - 48px));
+
+  /* padding horizontal fluido, se repite en nav y en secciones futuras */
+  --spacing-content-x: clamp(24px, 5vw, 72px);
+  --spacing-nav-gap: clamp(20px, 3vw, 40px);
+}

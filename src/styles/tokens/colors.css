@@ -1,0 +1,49 @@
+@theme {
+  --color-tint-50: oklch(0.921 0.021 227.49);
+  --color-tint-100: oklch(0.841 0.045 223.79);
+  --color-tint-200: oklch(0.693 0.046 224.66);
+  --color-tint-300: oklch(0.541 0.035 222.55);
+  --color-tint-400: oklch(0.393 0.026 226.89);
+  --color-tint-500: oklch(0.244 0.016 224.34);
+  --color-tint-600: oklch(0.223 0.014 220.24);
+  --color-tint-700: oklch(0.198 0.013 222.88);
+  --color-tint-800: oklch(0.176 0.012 226.07);
+  --color-tint-900: oklch(0.131 0.008 232.12);
+  --color-tint-950: oklch(0.103 0.008 223.94);
+
+  --color-fog-50: oklch(0.984 0.002 196.27);
+  --color-fog-100: oklch(0.956 0.005 228.64);
+  --color-fog-200: oklch(0.913 0.01 219.49);
+  --color-fog-300: oklch(0.878 0.015 224.45);
+  --color-fog-400: oklch(0.834 0.02 220.85);
+  --color-fog-500: oklch(0.791 0.02 222.17);
+  --color-fog-600: oklch(0.662 0.016 224.56);
+  --color-fog-700: oklch(0.534 0.013 217.58);
+  --color-fog-800: oklch(0.396 0.01 216.67);
+  --color-fog-900: oklch(0.265 0.007 229.07);
+  --color-fog-950: oklch(0.206 0.005 219.66);
+
+  --color-foam-50: #ffffff;
+  --color-foam-100: #fcfcfc;
+  --color-foam-200: oklch(0.982 0.002 247.73);
+  --color-foam-300: oklch(0.982 0.002 247.73);
+  --color-foam-400: oklch(0.975 0.002 196.27);
+  --color-foam-500: oklch(0.966 0.002 228.43);
+  --color-foam-600: oklch(0.801 0.014 226.55);
+  --color-foam-700: oklch(0.637 0.012 226.02);
+  --color-foam-800: oklch(0.464 0.008 233.75);
+  --color-foam-900: oklch(0.302 0.006 214.31);
+  --color-foam-950: oklch(0.225 0.004 228.91);
+
+  --color-water-50: oklch(0.962 0.037 175.26);
+  --color-water-100: oklch(0.92 0.076 176.28);
+  --color-water-200: oklch(0.85 0.093 176.52);
+  --color-water-300: oklch(0.781 0.085 176.35);
+  --color-water-400: oklch(0.714 0.078 176.34);
+  --color-water-500: oklch(0.645 0.071 176.11);
+  --color-water-600: oklch(0.543 0.059 177.21);
+  --color-water-700: oklch(0.442 0.049 176.1);
+  --color-water-800: oklch(0.339 0.036 176.21);
+  --color-water-900: oklch(0.238 0.027 175.06);
+  --color-water-950: oklch(0.186 0.022 173.63);
+}

@@ -1,0 +1,23 @@
+@theme {
+  --animate-rise-1: q-rise 1s var(--ease-in-out) 0.2s both;
+  --animate-rise-2: q-rise 1s var(--ease-in-out) 0.55s both;
+  --animate-rise-fast: q-rise 0.8s var(--ease-in-out) both;
+
+  --blur-nav: 10px;
+  /* --duration-calm NO se declara: a diferencia de --blur-*/--container-*,
+     el utility "duration" de Tailwind v4 no lee de un namespace abierto
+     --duration-*, solo acepta valores bare (duration-400) o su set fijo
+     nativo — una clase "duration-calm" no genera ninguna regla CSS.
+     Se usa duration-400 directamente (400ms, mismo valor). */
+
+  @keyframes q-rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

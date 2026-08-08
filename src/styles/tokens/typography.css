@@ -1,0 +1,19 @@
+@theme {
+  --text-hero: clamp(44px, 6vw, 84px);
+  --text-h1: 56px;
+  --text-h2: 36px;
+  --text-h3: 24px;
+  --text-md: 17px;
+
+  --text-lg: 20px;
+  --text-sm: 15px;
+  --text-xs: 13px;
+
+  --leading-tight: 1.1;
+  --leading-relaxed: 1.7;
+
+  /* h1 del hero. Distinto de --text-hero (44-84px): el markup fuente del
+     hero usa un clamp propio, más grande, no el token genérico */
+  --text-hero-title: clamp(64px, 11vw, 170px);
+  --leading-hero: 1.05;
+}
