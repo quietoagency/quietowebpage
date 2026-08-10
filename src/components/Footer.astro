@@ -1,0 +1,55 @@
+---
+import Logo from "./ui/Logo.astro";
+---
+
+<footer id="contacto" class="mx-7.5 overflow-hidden rounded-t-3xl bg-tint-500 text-fog-500">
+  <div class="mx-auto max-w-content box-border px-content-x pt-footer-y">
+    <div class="mb-footer-hablemos-gap text-center">
+      <h2 class="m-0 mb-6 font-sans font-normal text-hero text-foam-500">hablemos.</h2>
+      <a
+        href="mailto:hola@quietostudio.com"
+        class="text-footer-email text-water-500 underline decoration-1 underline-offset-5 transition-colors duration-400 ease-in-out hover:text-foam-500"
+      >
+        hola@quietostudio.com
+      </a>
+    </div>
+    <div class="grid grid-cols-footer gap-footer-columns-gap">
+      <div class="flex flex-col gap-3.5">
+        <span class="text-xs font-semibold uppercase tracking-eyebrow text-fog-500">Secciones</span>
+        <a href="#servicios" class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500"
+          >servicios</a
+        >
+        <a href="#trabajo" class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500"
+          >trabajo</a
+        >
+        <a href="#contacto" class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500"
+          >contacto</a
+        >
+      </div>
+      <div class="flex flex-col gap-3.5">
+        <span class="text-xs font-semibold uppercase tracking-eyebrow text-fog-500">Contacto</span>
+        <a
+          href="mailto:hola@quietostudio.com"
+          class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500"
+          >hola@quietostudio.com</a
+        >
+        <span class="text-sm text-fog-500">© 2026</span>
+      </div>
+      <div class="flex flex-col gap-3.5">
+        <span class="text-xs font-semibold uppercase tracking-eyebrow text-fog-500">Redes</span>
+        <a href="#" class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500">Instagram</a>
+        <a href="#" class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500">LinkedIn</a>
+        <a href="#" class="text-sm text-foam-500 transition-colors duration-400 ease-in-out hover:text-water-500">Behance</a>
+      </div>
+    </div>
+    <div class="mt-section-y flex translate-y-footer-wordmark items-end justify-center gap-footer-wordmark-gap">
+      <Logo
+        withWordmark
+        background="dark"
+        class="h-auto w-footer-symbol shrink-0"
+        wordmarkSizeClass="text-footer-wordmark leading-footer-wordmark"
+        wrapperClass="contents"
+      />
+    </div>
+  </div>
+</footer>

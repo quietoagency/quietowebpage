@@ -1,5 +1,5 @@
 ---
-import Logo from "./Logo.astro";
+import Logo from "./ui/Logo.astro";
 ---
 
 <div class="fixed top-0 left-0 right-0 z-50 flex flex-col animate-rise-fast">
@@ -7,7 +7,7 @@ import Logo from "./Logo.astro";
     id="q-nav"
     class="flex items-center justify-between mx-auto w-full max-w-content box-border border border-transparent py-7 px-content-x opacity-95 transition-all duration-calm ease-in-out motion-reduce:transition-none"
   >
-    <Logo withWordmark mode="light" />
+    <Logo withWordmark background="light" />
     <div class="flex gap-nav-gap text-sm font-medium">
       <a
         href="#servicios"
@@ -34,8 +34,8 @@ import Logo from "./Logo.astro";
     const island = [
       "max-w-nav-island",
       "rounded-2xl",
-      "mt-1.5",
-      "py-4",
+      "mt-5",
+      "py-6",
       "bg-foam-500/94",
       "backdrop-blur-nav",
       "border-fog-200",

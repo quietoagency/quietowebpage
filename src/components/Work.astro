@@ -1,0 +1,46 @@
+---
+import Eyebrow from "./ui/Eyebrow.astro";
+import WorkCard from "./ui/WorkCard.astro";
+
+const proyectos = [
+  { client: "Cliente A", context: "Identidad y sitio para estudio de arquitectura." },
+  { client: "Cliente B", context: "E-commerce para marca de cerámica artesanal." },
+];
+---
+
+<section id="trabajo">
+  <div
+    id="q-trabajo-inner"
+    class="mx-auto max-w-content box-border px-content-x py-section-y-lg transition-all duration-1000 ease-in-out motion-reduce:transition-none"
+  >
+    <Eyebrow>Trabajo</Eyebrow>
+    <div
+      id="q-trabajo-grid"
+      class="grid grid-cols-2 gap-trabajo-gap transition-all duration-1000 ease-in-out motion-reduce:transition-none"
+    >
+      {proyectos.map((p) => <WorkCard key={p.client} client={p.client} context={p.context} />)}
+    </div>
+  </div>
+</section>
+
+<script>
+  const inner = document.getElementById("q-trabajo-inner");
+  const grid = document.getElementById("q-trabajo-grid");
+
+  if (inner && grid) {
+    const FULL_INNER = ["max-w-full", "px-7.5"];
+    const BASE_INNER = ["max-w-content", "px-content-x"];
+    const FULL_GRID = ["gap-3"];
+    const BASE_GRID = ["gap-trabajo-gap"];
+
+    const setFull = (on: boolean) => {
+      inner.classList.remove(...(on ? BASE_INNER : FULL_INNER));
+      inner.classList.add(...(on ? FULL_INNER : BASE_INNER));
+      grid.classList.remove(...(on ? BASE_GRID : FULL_GRID));
+      grid.classList.add(...(on ? FULL_GRID : BASE_GRID));
+    };
+
+    const observer = new IntersectionObserver(([entry]) => setFull(entry.isIntersecting), { threshold: 0.35 });
+    observer.observe(inner);
+  }
+</script>

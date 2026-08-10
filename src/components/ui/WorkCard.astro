@@ -1,0 +1,32 @@
+---
+interface Props {
+  key: string;
+  client: string;
+  context: string;
+  image?: string;
+  href?: string;
+}
+const { client, context, image, href = "#" } = Astro.props;
+---
+
+<a href={href} class="group/work block text-tint-500 no-underline">
+  <div class="aspect-16/10 overflow-hidden rounded-xs bg-fog-200">
+    {
+      image ? (
+        <img
+          src={image}
+          alt={client}
+          class="block h-full w-full object-cover transition-transform duration-1200 ease-in-out group-hover/work:scale-102"
+        />
+      ) : (
+        <div class="grid h-full w-full place-items-center font-sans text-sm text-fog-500">Imagen del proyecto</div>
+      )
+    }
+  </div>
+  <div class="mt-4 flex flex-col gap-1">
+    <span class="font-sans font-medium text-md text-tint-500 transition-colors duration-400 ease-in-out group-hover/work:text-water-500">
+      {client}
+    </span>
+    <span class="font-sans text-sm text-fog-500">{context}</span>
+  </div>
+</a>

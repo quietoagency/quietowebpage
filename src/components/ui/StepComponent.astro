@@ -1,0 +1,15 @@
+---
+interface Props {
+  key: string;
+  num: string;
+  title: string;
+  description: string;
+}
+const { num, title, description } = Astro.props;
+---
+
+<div class="border-t border-fog-500 pt-7 transition duration-400 ease-in-out group-hover/services:not-hover:opacity-45 group-hover/services:not-hover:blur-dim group-hover/services:not-hover:grayscale">
+  <p class="m-0 mb-4 text-sm text-fog-500">{num}</p>
+  <h2 class="m-0 mb-3.5 font-sans font-medium text-service-title">{title}</h2>
+  <p class="text-md m-0 leading-relaxed text-fog-500">{description}</p>
+</div>

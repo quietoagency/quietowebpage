@@ -7,4 +7,28 @@
   /* padding horizontal fluido, se repite en nav y en secciones futuras */
   --spacing-content-x: clamp(24px, 5vw, 72px);
   --spacing-nav-gap: clamp(20px, 3vw, 40px);
+
+  /* sección Manifiesto */
+  --container-lede: 32ch; /* max-width del párrafo izquierdo */
+  --spacing-section-y: clamp(48px, 8vh, 96px); /* padding vertical de la sección y gap interno de la columna izquierda */
+  --spacing-manifesto-gap: clamp(40px, 6vw, 96px); /* gap entre las dos columnas */
+  --width-manifesto-symbol: clamp(80px, 8vw, 110px);
+  --grid-template-columns-manifesto: minmax(220px, 1fr) minmax(300px, 2fr);
+
+  /* sección Servicios — spacing-section-y-lg se reusa después en Trabajo */
+  --spacing-section-y-lg: clamp(96px, 15vh, 200px);
+  --spacing-services-gap: clamp(32px, 4vw, 64px);
+  --grid-template-columns-services: repeat(auto-fit, minmax(260px, 1fr));
+
+  /* sección Trabajo */
+  --spacing-trabajo-gap: clamp(32px, 4vw, 56px);
+
+  /* footer */
+  --spacing-footer-y: clamp(56px, 9vh, 96px);
+  --spacing-footer-hablemos-gap: clamp(64px, 10vh, 120px);
+  --grid-template-columns-footer: repeat(auto-fit, minmax(180px, 1fr));
+  --spacing-footer-columns-gap: clamp(32px, 5vw, 64px);
+  --spacing-footer-wordmark-gap: clamp(16px, 3vw, 40px);
+  --width-footer-symbol: clamp(90px, 11vw, 170px);
+  --translate-footer-wordmark: 8%;
 }

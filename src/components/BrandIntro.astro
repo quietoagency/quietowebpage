@@ -1,0 +1,44 @@
+---
+import Logo from "./ui/Logo.astro";
+---
+
+<section class="relative min-h-svh flex items-center box-border bg-tint-500 text-foam-500">
+  <div class="mx-auto w-full max-w-content box-border grid grid-cols-manifesto items-start gap-manifesto-gap py-section-y px-content-x">
+    <div
+      data-reveal
+      class="flex flex-col gap-section-y opacity-0 translate-y-7 transition duration-800 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
+    >
+      <p class="m-0 max-w-lede text-sm leading-relaxed text-fog-500 text-pretty">
+        En un rubro que vende velocidad, elegimos criterio. Decidimos por convicción y no por apuro, y esa pausa
+        es lo que hace que las cosas salgan bien.
+      </p>
+      <Logo background="dark" class="h-auto w-manifesto-symbol" animated />
+    </div>
+    <p
+      data-reveal
+      class="m-0 font-sans font-semibold text-manifesto-statement leading-manifesto-statement text-balance opacity-0 translate-y-7 transition duration-800 delay-150 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
+    >
+      Quieto <em class="font-display font-normal italic text-water-500">no significa lento.</em> Significa
+      <em class="font-display font-normal italic text-water-500"> deliberado.</em>
+    </p>
+  </div>
+</section>
+
+<script>
+  const revealEls = document.querySelectorAll<HTMLElement>("[data-reveal]");
+  const HIDDEN_CLASSES = ["opacity-0", "translate-y-7"];
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove(...HIDDEN_CLASSES);
+          obs.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+</script>

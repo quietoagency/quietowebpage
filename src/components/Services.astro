@@ -1,0 +1,31 @@
+---
+import Eyebrow from "./ui/Eyebrow.astro";
+import StepComponent from "./ui/StepComponent.astro";
+
+const servicios = [
+  {
+    num: "01",
+    title: "Diseño de marca",
+    description:
+      "Identidad visual completa: símbolo, tipografía, paleta y reglas de uso que sobreviven al primer entusiasmo.",
+  },
+  {
+    num: "02",
+    title: "Diseño y desarrollo web",
+    description:
+      "Sitios diseñados y construidos por el mismo equipo, del primer wireframe al deploy. Sin traducciones perdidas.",
+  },
+  {
+    num: "03",
+    title: "Mantenimiento y evolución",
+    description: "El sitio no se abandona al lanzarlo: lo cuidamos, lo medimos y lo hacemos crecer con la marca.",
+  },
+];
+---
+
+<section id="servicios" class="mx-auto max-w-content px-content-x pt-section-y-lg pb-section-y-lg">
+  <Eyebrow>Servicios</Eyebrow>
+  <div class="group/services grid grid-cols-services gap-services-gap">
+    {servicios.map((s) => <StepComponent key={s.num} num={s.num} title={s.title} description={s.description} />)}
+  </div>
+</section>

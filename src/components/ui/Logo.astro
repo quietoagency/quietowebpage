@@ -1,0 +1,49 @@
+---
+interface Props {
+  withWordmark?: boolean;
+  background?: "light" | "dark";
+  class?: string;
+  wordmarkSizeClass?: string;
+  wrapperClass?: string;
+  animated?: boolean;
+}
+const {
+  withWordmark = false,
+  background = "light",
+  class: className = "h-7 w-auto",
+  wordmarkSizeClass = "text-h3 leading-none",
+  wrapperClass = "inline-flex items-center gap-2.5",
+  animated = false,
+} = Astro.props;
+const inkClass = background === "dark" ? "stroke-foam-500" : "stroke-tint-500";
+const wordmarkColorClass = background === "dark" ? "text-foam-500" : "text-tint-500";
+const waveClipId = `logo-wave-clip-${crypto.randomUUID()}`;
+---
+
+<span class={wrapperClass}>
+  <svg viewBox="0 0 104 136" fill="none" class={`block ${className}`} role="img" aria-label="quieto">
+    <defs>
+      <clipPath id={waveClipId}>
+        <rect x="15" y="38" width="70" height="36" />
+      </clipPath>
+    </defs>
+    <g clip-path={`url(#${waveClipId})`}>
+      <path
+        d="M22 56 C31 47 41 47 50 56 C59 65 69 65 78 56 C87 47 97 47 106 56 C115 65 125 65 134 56"
+        stroke-width="11"
+        stroke-linecap="round"
+        fill="none"
+        class={`stroke-water-500 ${animated ? "animate-wave" : ""}`}
+      />
+    </g>
+    <circle cx="50" cy="50" r="41" stroke-width="11" class={inkClass} />
+    <path d="M91 52 L91 128" stroke-width="11" stroke-linecap="round" class={inkClass} />
+  </svg>
+  {
+    withWordmark && (
+      <span class={`font-wordmark tracking-wordmark font-bold ${wordmarkColorClass} ${wordmarkSizeClass}`}>
+        quieto
+      </span>
+    )
+  }
+</span>
