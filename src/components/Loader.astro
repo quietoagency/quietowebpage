@@ -1,0 +1,60 @@
+---
+import Logo from "./ui/Logo.astro";
+---
+
+<div
+  id="q-loader"
+  role="status"
+  aria-label="Cargando"
+  class="fixed inset-0 z-[60] flex items-center justify-center bg-tint-500 transition-transform duration-700 ease-in-out motion-reduce:hidden"
+>
+  <Logo background="dark" class="h-16 w-auto sm:h-20" />
+</div>
+
+<noscript>
+  <style>
+    #q-loader {
+      display: none;
+    }
+  </style>
+</noscript>
+
+<script>
+  const INITIAL_DELAY = 0;
+  const WAVE_DRAW_MS = 1400;
+  const HOLD_MS = 250;
+
+  const loader = document.getElementById("q-loader");
+  const wavePath = loader?.querySelector<SVGPathElement>("svg path.stroke-water-500") ?? null;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (loader) {
+    if (prefersReducedMotion) {
+      loader.remove();
+    } else {
+      document.body.classList.add("overflow-hidden");
+
+      const finish = () => {
+        loader.addEventListener("transitionend", () => loader.remove(), { once: true });
+        loader.style.transform = "translateY(-100%)";
+        document.body.classList.remove("overflow-hidden");
+      };
+
+      if (wavePath) {
+        const length = wavePath.getTotalLength();
+        wavePath.style.strokeDasharray = `${length}`;
+        wavePath.style.strokeDashoffset = `${length}`;
+
+        window.setTimeout(() => {
+          wavePath.style.transition = `stroke-dashoffset ${WAVE_DRAW_MS}ms ease-in-out`;
+          requestAnimationFrame(() => {
+            wavePath.style.strokeDashoffset = "0";
+          });
+          window.setTimeout(finish, WAVE_DRAW_MS + HOLD_MS);
+        }, INITIAL_DELAY);
+      } else {
+        window.setTimeout(finish, INITIAL_DELAY + WAVE_DRAW_MS + HOLD_MS);
+      }
+    }
+  }
+</script>

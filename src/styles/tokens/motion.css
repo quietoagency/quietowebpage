@@ -1,8 +1,4 @@
 @theme {
-  --animate-rise-1: q-rise 1s var(--ease-in-out) 0.2s both;
-  --animate-rise-2: q-rise 1s var(--ease-in-out) 0.55s both;
-  --animate-rise-fast: q-rise 0.8s var(--ease-in-out) both;
-
   --blur-nav: 10px;
   /* --duration-calm NO se declara: a diferencia de --blur- o --container-
      (namespaces abiertos), el utility "duration" de Tailwind v4 no acepta
@@ -18,17 +14,6 @@
 
   /* blur del efecto hover-dim de las cards de Servicios, sin match nativo */
   --blur-dim: 3px;
-
-  @keyframes q-rise {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
 
   @keyframes q-wave {
     from {
