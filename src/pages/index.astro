@@ -7,10 +7,33 @@ import BrandIntro from "../components/BrandIntro.astro";
 import Services from "../components/Services.astro";
 import Work from "../components/Work.astro";
 import Footer from "../components/Footer.astro";
+import { SEO } from "astro-seo";
 ---
 
 <html lang="es" class="scroll-smooth">
 	<head>
+		  <SEO
+      title="quieto - agencia de diseño y desarrollo"
+      description="Quieto es una agencia de diseño y desarrollo basada en Buenos Aires pero con clientes alrededor del mundo. Decidimos por convicción y no por apuro, y esa pausa es lo que hace que las cosas salgan bien."
+      openGraph={{
+        basic: {
+          title: "quieto - agencia de diseño y desarrollo",
+          type: "Logo",
+          image: "/media/images/logoimage.png",
+        }
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+        meta: [
+          {
+            name: "twitter:image",
+            content: "/media/images/logoimage.png",
+          },
+          { name: "twitter:title", content: "quieto - agencia de diseño y desarrollo" },
+          { name: "twitter:description", content: "Quieto es una agencia de diseño y desarrollo basada en Buenos Aires pero con clientes alrededor del mundo. Decidimos por convicción y no por apuro, y esa pausa es lo que hace que las cosas salgan bien" },
+        ],
+      }}
+    />
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.svg" />
