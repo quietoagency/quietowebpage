@@ -3,20 +3,25 @@ import Logo from "./ui/Logo.astro";
 ---
 
 <section class="relative min-h-svh flex items-center box-border bg-tint-500 text-foam-500">
-  <div class="mx-auto w-full max-w-content box-border grid grid-cols-manifesto items-start gap-manifesto-gap py-section-y px-content-x">
+  <div
+    class="mx-auto w-full max-w-content box-border grid grid-cols-manifesto items-start gap-x-manifesto-gap gap-y-section-y py-section-y px-content-x [grid-template-areas:var(--grid-areas-manifesto)] max-mobile:grid-cols-1 max-mobile:justify-items-center max-mobile:gap-y-10 max-mobile:text-center max-mobile:[grid-template-areas:var(--grid-areas-manifesto-mobile)]"
+  >
+    <p
+      data-reveal
+      class="[grid-area:text] m-0 max-w-lede max-mobile:max-w-[44ch] text-sm leading-relaxed text-fog-500 text-pretty opacity-0 translate-y-7 transition duration-800 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
+    >
+      En un rubro que vende velocidad, elegimos criterio. Decidimos por convicción y no por apuro, y esa pausa
+      es lo que hace que las cosas salgan bien.
+    </p>
     <div
       data-reveal
-      class="flex flex-col gap-section-y opacity-0 translate-y-7 transition duration-800 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
+      class="[grid-area:svg] opacity-0 translate-y-7 transition duration-800 delay-80 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
     >
-      <p class="m-0 max-w-lede text-sm leading-relaxed text-fog-500 text-pretty">
-        En un rubro que vende velocidad, elegimos criterio. Decidimos por convicción y no por apuro, y esa pausa
-        es lo que hace que las cosas salgan bien.
-      </p>
       <Logo background="dark" class="h-auto w-manifesto-symbol" animated />
     </div>
     <p
       data-reveal
-      class="m-0 font-sans font-semibold text-manifesto-statement leading-manifesto-statement text-balance opacity-0 translate-y-7 transition duration-800 delay-150 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
+      class="[grid-area:heading] m-0 font-sans font-semibold text-manifesto-statement max-mobile:text-manifesto-statement-mobile leading-manifesto-statement text-balance opacity-0 translate-y-7 transition duration-800 delay-150 ease-in-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
     >
       Quieto <em class="font-display font-normal italic text-water-500">no significa lento.</em> Significa
       <em class="font-display font-normal italic text-water-500"> deliberado.</em>

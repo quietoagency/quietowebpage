@@ -8,7 +8,7 @@ import Logo from "./ui/Logo.astro";
     class="flex items-center justify-between mx-auto w-full max-w-content box-border border border-transparent py-7 px-content-x opacity-95 transition-all duration-calm ease-in-out motion-reduce:transition-none"
   >
     <Logo withWordmark background="light" />
-    <div class="flex gap-nav-gap text-sm font-medium">
+    <div class="flex gap-nav-gap text-sm font-medium max-mobile:hidden">
       <a
         href="#servicios"
         class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
@@ -25,11 +25,56 @@ import Logo from "./ui/Logo.astro";
         >contacto</a
       >
     </div>
+    <button
+      id="q-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="q-menu-panel"
+      aria-label="menú"
+      class="hidden max-mobile:flex relative h-10 w-10 items-center justify-center"
+    >
+      <span class="relative block h-4 w-6">
+        <span
+          id="q-menu-line-1"
+          class="absolute left-0 top-0 h-0.5 w-full bg-tint-500 transition-all duration-calm ease-in-out"
+        ></span>
+        <span
+          id="q-menu-line-2"
+          class="absolute left-0 top-1.75 h-0.5 w-full bg-tint-500 transition-all duration-calm ease-in-out"
+        ></span>
+        <span
+          id="q-menu-line-3"
+          class="absolute left-0 top-3.5 h-0.5 w-full bg-tint-500 transition-all duration-calm ease-in-out"
+        ></span>
+      </span>
+    </button>
   </nav>
+</div>
+<div
+  id="q-menu-panel"
+  class="fixed inset-0 z-40 hidden max-mobile:flex flex-col items-start justify-center gap-1 bg-foam-500 px-content-x opacity-0 invisible transition-opacity duration-calm ease-in-out motion-reduce:transition-none"
+>
+  <a
+    href="#servicios"
+    class="py-2 text-menu-link font-medium text-tint-500 underline-offset-5 opacity-0 translate-y-7 transition-all duration-400 ease-in-out hover:text-water-500 hover:underline motion-reduce:transition-none"
+    >servicios</a
+  >
+  <a
+    href="#trabajo"
+    class="py-2 text-menu-link font-medium text-tint-500 underline-offset-5 opacity-0 translate-y-7 transition-all duration-400 ease-in-out hover:text-water-500 hover:underline motion-reduce:transition-none"
+    >trabajo</a
+  >
+  <a
+    href="#contacto"
+    class="py-2 text-menu-link font-medium text-tint-500 underline-offset-5 opacity-0 translate-y-7 transition-all duration-400 ease-in-out hover:text-water-500 hover:underline motion-reduce:transition-none"
+    >contacto</a
+  >
 </div>
 
 <script>
   const nav = document.getElementById("q-nav");
+  let menuOpen = false;
+
   if (nav) {
     const island = [
       "max-w-nav-island",
@@ -45,8 +90,72 @@ import Logo from "./ui/Logo.astro";
       nav.classList.remove(...(on ? base : island));
       nav.classList.add(...(on ? island : base));
     };
-    const onScroll = () => setIsland(window.scrollY > 48);
+    const onScroll = () => {
+      if (menuOpen) return;
+      setIsland(window.scrollY > 48);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    const toggle = document.getElementById("q-menu-toggle");
+    const panel = document.getElementById("q-menu-panel");
+    const line1 = document.getElementById("q-menu-line-1");
+    const line2 = document.getElementById("q-menu-line-2");
+    const line3 = document.getElementById("q-menu-line-3");
+
+    if (toggle && panel && line1 && line2 && line3) {
+      const panelClosed = ["opacity-0", "invisible"];
+      const panelOpen = ["opacity-100", "visible"];
+      const line1Closed = ["top-0"];
+      const line1Open = ["top-[7px]", "rotate-45"];
+      const line2Closed = ["opacity-100"];
+      const line2Open = ["opacity-0"];
+      const line3Closed = ["top-[14px]"];
+      const line3Open = ["top-[7px]", "-rotate-45"];
+      const linkClosed = ["opacity-0", "translate-y-7"];
+      const linkOpen = ["opacity-100", "translate-y-0"];
+      const linkDelays = ["delay-0", "delay-150", "delay-300"];
+      const links = [...panel.querySelectorAll("a")];
+
+      const setMenu = (open: boolean) => {
+        menuOpen = open;
+        toggle.setAttribute("aria-expanded", String(open));
+        panel.classList.remove(...(open ? panelClosed : panelOpen));
+        panel.classList.add(...(open ? panelOpen : panelClosed));
+        line1.classList.remove(...(open ? line1Closed : line1Open));
+        line1.classList.add(...(open ? line1Open : line1Closed));
+        line2.classList.remove(...(open ? line2Closed : line2Open));
+        line2.classList.add(...(open ? line2Open : line2Closed));
+        line3.classList.remove(...(open ? line3Closed : line3Open));
+        line3.classList.add(...(open ? line3Open : line3Closed));
+        links.forEach((link, i) => {
+          link.classList.remove(...(open ? linkClosed : linkOpen));
+          link.classList.add(...(open ? linkOpen : linkClosed));
+          link.classList.toggle(linkDelays[i], open);
+        });
+        document.body.classList.toggle("overflow-hidden", open);
+        if (open) {
+          setIsland(false);
+          nav.classList.add("bg-foam-500");
+        } else {
+          nav.classList.remove("bg-foam-500");
+          onScroll();
+        }
+      };
+
+      toggle.addEventListener("click", () => setMenu(!menuOpen));
+
+      links.forEach((link) => {
+        link.addEventListener("click", () => setMenu(false));
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menuOpen) setMenu(false);
+      });
+
+      window.addEventListener("resize", () => {
+        if (menuOpen && window.innerWidth > 820) setMenu(false);
+      });
+    }
   }
 </script>

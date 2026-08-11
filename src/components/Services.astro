@@ -2,7 +2,7 @@
 import Eyebrow from "./ui/Eyebrow.astro";
 import StepComponent from "./ui/StepComponent.astro";
 
-const servicios = [
+const services = [
   {
     num: "01",
     title: "Diseño de marca",
@@ -23,9 +23,9 @@ const servicios = [
 ];
 ---
 
-<section id="servicios" class="mx-auto max-w-content px-content-x pt-section-y-lg pb-section-y-lg">
+<section id="servicios" class="mx-auto max-w-content px-content-x pt-section-y-lg max-mobile:pb-section-y-lg">
   <Eyebrow>Servicios</Eyebrow>
   <div class="group/services grid grid-cols-services gap-services-gap">
-    {servicios.map((s) => <StepComponent key={s.num} num={s.num} title={s.title} description={s.description} />)}
+    {services.map((s) => <StepComponent key={s.num} num={s.num} title={s.title} description={s.description} />)}
   </div>
 </section>

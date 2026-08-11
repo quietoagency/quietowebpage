@@ -12,19 +12,19 @@
   --leading-tight: 1.1;
   --leading-relaxed: 1.7;
 
-
   --text-hero-title: clamp(64px, 11vw, 170px);
   --leading-hero: 1.05;
 
   --text-manifesto-statement: clamp(34px, 4.5vw, 64px);
+  --text-manifesto-statement-mobile: clamp(30px, 8vw, 44px);
   --leading-manifesto-statement: 1.18;
 
-  /* sección Servicios */
   --text-service-title: clamp(22px, 2vw, 28px);
-  --tracking-eyebrow: 0.12em; /* nativo más cercano es tracking-widest=0.1em, no exacto */
+  --tracking-eyebrow: 0.12em;
 
-  /* footer */
   --text-footer-email: clamp(17px, 1.6vw, 21px);
-  --text-footer-wordmark: clamp(120px, 21vw, 340px);
+  --text-footer-wordmark: clamp(102px, 18vw, 290px);
   --leading-footer-wordmark: 0.8;
+
+  --text-menu-link: clamp(28px, 8vw, 40px);
 }

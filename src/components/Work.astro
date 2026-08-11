@@ -2,36 +2,36 @@
 import Eyebrow from "./ui/Eyebrow.astro";
 import WorkCard from "./ui/WorkCard.astro";
 
-const proyectos = [
+const proyects = [
   { client: "Cliente A", context: "Identidad y sitio para estudio de arquitectura." },
   { client: "Cliente B", context: "E-commerce para marca de cerámica artesanal." },
 ];
 ---
 
-<section id="trabajo">
+<section id="work">
   <div
-    id="q-trabajo-inner"
-    class="mx-auto max-w-content box-border px-content-x py-section-y-lg transition-all duration-1000 ease-in-out motion-reduce:transition-none"
+    id="q-work-inner"
+    class="mx-auto max-w-content box-border px-content-x sm:py-section-y-lg transition-all duration-1000 ease-in-out motion-reduce:transition-none"
   >
     <Eyebrow>Trabajo</Eyebrow>
     <div
-      id="q-trabajo-grid"
-      class="grid grid-cols-2 gap-trabajo-gap transition-all duration-1000 ease-in-out motion-reduce:transition-none"
+      id="q-work-grid"
+      class="grid grid-cols-2 max-mobile:grid-cols-1 gap-work-gap transition-all duration-1000 ease-in-out motion-reduce:transition-none"
     >
-      {proyectos.map((p) => <WorkCard key={p.client} client={p.client} context={p.context} />)}
+      {proyects.map((p) => <WorkCard key={p.client} client={p.client} context={p.context} />)}
     </div>
   </div>
 </section>
 
 <script>
-  const inner = document.getElementById("q-trabajo-inner");
-  const grid = document.getElementById("q-trabajo-grid");
+  const inner = document.getElementById("q-work-inner");
+  const grid = document.getElementById("q-work-grid");
 
   if (inner && grid) {
-    const FULL_INNER = ["max-w-full", "px-7.5"];
+    const FULL_INNER = ["max-w-full", "px-7.5", "max-mobile:px-4"];
     const BASE_INNER = ["max-w-content", "px-content-x"];
     const FULL_GRID = ["gap-3"];
-    const BASE_GRID = ["gap-trabajo-gap"];
+    const BASE_GRID = ["gap-work-gap"];
 
     const setFull = (on: boolean) => {
       inner.classList.remove(...(on ? BASE_INNER : FULL_INNER));
