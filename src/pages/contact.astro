@@ -1,0 +1,65 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import { SEO } from "astro-seo";
+---
+
+<html lang="es" class="scroll-smooth">
+	<head>
+		<SEO
+			title="contacto - quieto"
+			description="Contanos qué necesitás y en qué punto está tu marca. Leemos cada mensaje con calma y te respondemos en poco tiempo."
+			openGraph={{
+				basic: {
+					title: "contacto - quieto",
+					type: "website",
+					image: "/media/images/logoimage.png",
+				},
+			}}
+			extend={{
+				link: [{ rel: "icon", href: "/favicon.svg" }],
+			}}
+		/>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>contacto - quieto</title>
+	</head>
+	<body class="bg-tint-500 selection:bg-water-500 selection:text-foam-50">
+		<Header background="dark" />
+		<main class="min-h-svh flex flex-col justify-center pt-28 pb-16 box-border">
+			<div
+				class="mx-auto w-full max-w-content box-border grid grid-cols-2 items-center gap-24 px-content-x max-mobile:grid-cols-1 max-mobile:gap-10 max-mobile:text-center"
+			>
+				<div class="max-w-narrow max-mobile:mx-auto">
+					<h1 class="m-0 mb-6 font-sans font-normal text-contact-title leading-tight text-foam-500">
+						hagamos algo increíble,<br /><span class="text-water-500">juntos.</span>
+					</h1>
+					<p class="m-0 mb-8 text-lg leading-relaxed text-fog-500">
+						Contanos qué necesitás y en qué punto está tu marca. Leemos cada mensaje con calma y te respondemos en
+						poco tiempo.
+					</p>
+					<a
+						href="#form"
+						class="group/cta inline-flex items-center gap-2.5 text-md font-medium text-water-500 underline underline-offset-5 decoration-1"
+					>
+						<span
+							class="inline-block transition-transform duration-400 ease-in-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+							>↗</span
+						>empecemos
+					</a>
+				</div>
+
+				<div class="relative overflow-hidden rounded-xs aspect-4/5 w-full max-mobile:max-w-narrow max-mobile:mx-auto">
+					<img
+						src="/media/images/quietomockup.webp"
+						alt="Quieto mockup"
+						class="block h-full rounded-3xl w-full object-cover"
+					/>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

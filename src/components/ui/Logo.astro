@@ -36,12 +36,12 @@ const waveClipId = `logo-wave-clip-${crypto.randomUUID()}`;
         class={`stroke-water-500 ${animated ? "animate-wave" : ""}`}
       />
     </g>
-    <circle cx="50" cy="50" r="41" stroke-width="11" class={inkClass} />
-    <path d="M91 52 L91 128" stroke-width="11" stroke-linecap="round" class={inkClass} />
+    <circle cx="50" cy="50" r="41" stroke-width="11" class={`q-logo-ink ${inkClass}`} />
+    <path d="M91 52 L91 128" stroke-width="11" stroke-linecap="round" class={`q-logo-ink ${inkClass}`} />
   </svg>
   {
     withWordmark && (
-      <span class={`font-wordmark tracking-wordmark font-bold ${wordmarkColorClass} ${wordmarkSizeClass}`}>
+      <span class={`q-logo-word font-wordmark tracking-wordmark font-bold ${wordmarkColorClass} ${wordmarkSizeClass}`}>
         quieto
       </span>
     )
