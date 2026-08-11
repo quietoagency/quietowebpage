@@ -24,6 +24,7 @@
 
   --text-footer-email: clamp(17px, 1.6vw, 21px);
   --text-footer-wordmark: clamp(102px, 18vw, 290px);
+  --text-footer-wordmark-mobile: clamp(70px, 9vw, 64px);
   --leading-footer-wordmark: 0.8;
 
   --text-menu-link: clamp(28px, 8vw, 40px);
