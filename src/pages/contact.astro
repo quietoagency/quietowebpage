@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import { SEO } from "astro-seo";
+import StepOne from "../components/contact/StepOne.astro";
+import StepTwo from "../components/contact/StepTwo.astro";
 ---
 
 <html lang="es" class="scroll-smooth">
@@ -29,7 +31,19 @@ import { SEO } from "astro-seo";
 	</head>
 	<body class="bg-tint-500 selection:bg-water-500 selection:text-foam-50">
 		<Header background="dark" />
-		<main class="min-h-svh flex flex-col justify-center pt-28 pb-16 box-border">
+		<div
+			class="hidden fixed inset-0 min-h-svh flex-col items-center justify-center overflow-y-auto pt-28 pb-16 box-border px-content-x"
+			id="step-one"
+		>
+			<StepOne />
+		</div>
+		<div
+			class="hidden fixed inset-0 min-h-svh flex-col items-center justify-center overflow-y-auto pt-28 pb-16 box-border px-content-x"
+			id="step-two"
+		>
+			<StepTwo />
+		</div>
+		<main class="fixed inset-0 min-h-svh flex flex-col justify-center overflow-y-auto pt-28 pb-16 box-border" id="main">
 			<div
 				class="mx-auto w-full max-w-content box-border grid grid-cols-2 items-center gap-24 px-content-x max-mobile:grid-cols-1 max-mobile:gap-10 max-mobile:text-center"
 			>
@@ -41,15 +55,16 @@ import { SEO } from "astro-seo";
 						Contanos qué necesitás y en qué punto está tu marca. Leemos cada mensaje con calma y te respondemos en
 						poco tiempo.
 					</p>
-					<a
-						href="#form"
+					<button
+						type="button"
+						id="start-button"
 						class="group/cta inline-flex items-center gap-2.5 text-md font-medium text-water-500 underline underline-offset-5 decoration-1"
 					>
 						<span
 							class="inline-block transition-transform duration-400 ease-in-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
 							>↗</span
 						>empecemos
-					</a>
+				</button>
 				</div>
 
 				<div class="relative overflow-hidden rounded-xs aspect-4/5 w-full max-mobile:max-w-narrow max-mobile:mx-auto">
@@ -63,3 +78,97 @@ import { SEO } from "astro-seo";
 		</main>
 	</body>
 </html>
+<script>
+	import { StepTwoSchema } from "../lib/formSchema"
+	import { StepOneSchema } from "../lib/formSchema"
+
+	const startButton = document.getElementById("start-button")
+	const main = document.getElementById("main")
+	const stepOne = document.getElementById("step-one")
+	const stepTwo = document.getElementById("step-two")
+	const stepOneForm = document.getElementById("step-one-form") as HTMLFormElement | null
+	const stepTwoForm = document.getElementById("step-two-form") as HTMLFormElement | null
+	const stepOneBack = document.getElementById("step-one-back")
+	const stepTwoBack = document.getElementById("step-two-back")
+
+	function fadeStep(el: HTMLElement, direction: "normal" | "reverse", onDone?: () => void) {
+		el.style.animationDirection = direction
+		el.classList.remove("animate-contact-fade")
+		void el.offsetWidth
+		el.classList.add("animate-contact-fade")
+		el.addEventListener("animationend", () => onDone?.(), { once: true })
+	}
+
+	function showStep(el: HTMLElement | null) {
+		if (!el) return
+		el.classList.remove("hidden")
+		el.classList.add("flex")
+		fadeStep(el, "normal")
+	}
+
+	function hideStep(el: HTMLElement | null, then?: () => void) {
+		if (!el) return
+		fadeStep(el, "reverse", () => {
+			el.classList.remove("flex")
+			el.classList.add("hidden")
+			then?.()
+		})
+	}
+
+	startButton?.addEventListener("click", () => {
+		hideStep(main, () => showStep(stepOne))
+	})
+
+	function clearFieldErrors(form: HTMLFormElement) {
+		form.querySelectorAll("[data-error-for]").forEach((el) => {
+			el.textContent = ""
+		})
+	}
+
+	function showFieldErrors(form: HTMLFormElement, fieldErrors: Record<string, string[] | undefined>) {
+		for (const [field, messages] of Object.entries(fieldErrors)) {
+			const el = form.querySelector(`[data-error-for="${field}"]`)
+			if (el) el.textContent = messages?.[0] ?? ""
+		}
+	}
+
+	stepOneForm?.addEventListener("submit", (e) => {
+		e.preventDefault()
+		const data = new FormData(stepOneForm)
+		const values = Object.fromEntries(data)
+		const result = StepOneSchema.safeParse(values)
+
+		clearFieldErrors(stepOneForm)
+
+		if (!result.success) {
+			showFieldErrors(stepOneForm, result.error.flatten().fieldErrors)
+			return
+		}
+
+		hideStep(stepOne, () => showStep(stepTwo))
+	})
+
+	stepTwoForm?.addEventListener("submit", (e) => {
+		e.preventDefault();
+		const data = new FormData(stepTwoForm)
+		const values = Object.fromEntries(data)
+		const result = StepTwoSchema.safeParse(values)
+
+		clearFieldErrors(stepTwoForm)
+
+		window.location.href = "/thanks"
+
+		if (!result.success) {
+			showFieldErrors(stepTwoForm, result.error.flatten().fieldErrors)
+			return;
+		}
+	})
+
+	stepOneBack?.addEventListener("click", () => {
+		hideStep(stepOne, () => showStep(main))
+	})
+
+	stepTwoBack?.addEventListener("click", () => {
+		hideStep(stepTwo, () => showStep(stepOne))
+	})
+</script>

@@ -28,7 +28,7 @@ const baseBarClass = background === "dark" ? "bg-foam-500" : "bg-tint-500";
         >trabajo</a
       >
       <a
-        href="#contacto"
+        href="/contact"
         class={`${baseTextClass} underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline`}
         >contacto</a
       >
@@ -86,12 +86,6 @@ const baseBarClass = background === "dark" ? "bg-foam-500" : "bg-tint-500";
   if (nav) {
     const isDarkVariant = nav.dataset.navTheme === "dark";
 
-    // Only the dark variant needs its text/logo/hamburger color to react to
-    // scroll state: the nav-scrolled "island" (and the mobile-menu-open state)
-    // always force an opaque light pill, so on a dark page the foam (white)
-    // base text must flip to tint (dark) whenever that light pill is showing,
-    // or it goes invisible. The default light variant never needs this: its
-    // text is already tint on both the transparent and the light-pill states.
     const setNavTheme = (isLight: boolean) => {
       if (!isDarkVariant) return;
       const textFrom = isLight ? "text-foam-500" : "text-tint-500";
@@ -181,9 +175,6 @@ const baseBarClass = background === "dark" ? "bg-foam-500" : "bg-tint-500";
         if (open) {
           setIsland(false);
           nav.classList.add("bg-foam-500");
-          // the forced solid bg above is always light, regardless of scroll
-          // state, so the nav text/logo must be dark here even though
-          // setIsland(false) just set them back to the "base" (foam) color
           setNavTheme(true);
         } else {
           nav.classList.remove("bg-foam-500");

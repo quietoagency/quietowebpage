@@ -1,27 +1,24 @@
 @theme {
   --blur-nav: 10px;
-  /* --duration-calm NO se declara: a diferencia de --blur- o --container-
-     (namespaces abiertos), el utility "duration" de Tailwind v4 no acepta
-     claves custom, solo valores bare (duration-400) o su set fijo nativo
-     — una clase "duration-calm" no genera ninguna regla CSS.
-     Se usa duration-400 directamente (400ms, mismo valor). */
-
-  /* ola del símbolo del logo: el path real tiene dos períodos de la curva
-     (el doble del ancho visible), recortado con clip-path a la ventana
-     original. Solo se traslada en X, la forma nunca cambia — así se ve
-     la ola "rodando" de verdad en vez de aplanarse e invertirse */
   --animate-wave: q-wave 6s linear infinite;
-
-  /* blur del efecto hover-dim de las cards de Servicios, sin match nativo */
   --blur-dim: 3px;
+  --animate-contact-fade: contact-fade 300ms ease-in-out forwards;
 
   @keyframes q-wave {
     from {
       transform: translateX(0);
     }
     to {
-      /* un período completo del patrón repetido en el path (56 unidades) */
       transform: translateX(-56px);
+    }
+  }
+
+  @keyframes contact-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 }

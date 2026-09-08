@@ -1,0 +1,49 @@
+---
+import { referalOptions } from "../../lib/constants"
+---
+
+<form id="step-two-form" class="w-full max-w-250">
+  <h1 class="text-fog-500 text-6xl pb-6">Sobre como podemos trabajar juntos</h1>
+	<div class="flex flex-col">
+		<label for="projectDetails" class="m-0 text-h3 font-bold text-foam-500">Contanos sobre tu proyecto</label>
+		<p class="m-0 text-md text-fog-500">Escribí una breve descripción sobre tu proyecto y tus requerimientos.</p>
+		<textarea
+			id="projectDetails"
+			name="projectDetails"
+			rows="1"
+			required
+			class="w-full resize-none border-0 border-b-2 border-fog-500 bg-transparent pt-[1lh] pb-1 font-sans text-md text-fog-500 placeholder:text-fog-500 transition-colors duration-400 ease-in-out focus:border-water-500 focus:outline-none"
+		></textarea>
+	</div>
+
+	<div class="mt-16 flex flex-col gap-6">
+		<label for="referal" class="m-0 text-h3 font-bold text-foam-500">¿Cómo nos conociste?</label>
+		<select
+			id="referal"
+			name="referal"
+			required
+			class="w-full rounded-xs border-0 border-b-2 border-foam-500 bg-tint-500 px-4 py-4 font-sans text-md text-fog-500 transition-colors duration-400 ease-in-out focus:border-water-500 focus:outline-none"
+		>
+			<option value="" disabled selected class="bg-tint-500 text-fog-500">Elegí una opción</option>
+			{referalOptions.map((option) => (
+				<option value={option.value} class="bg-tint-500 text-fog-500">{option.label}</option>
+			))}
+		</select>
+	</div>
+
+	<div class="mt-16 flex gap-6">
+		<button
+			type="button"
+			id="step-two-back"
+			class="h-13.5 w-75 flex-1 rounded-xs border border-water-500 bg-water-500 font-sans text-md text-white transition-all duration-400 ease-in-out hover:opacity-90"
+		>
+			Atras
+		</button>
+		<button
+			type="submit"
+			class="h-13.5 w-75 flex-1 rounded-xs border border-water-500 bg-water-500 font-sans text-md text-white transition-all duration-400 ease-in-out hover:opacity-90"
+		>
+			Enviar
+		</button>
+  </div>
+</form>

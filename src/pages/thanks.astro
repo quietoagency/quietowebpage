@@ -1,0 +1,134 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import { SEO } from "astro-seo";
+---
+
+<html lang="es" class="scroll-smooth">
+	<head>
+		<SEO
+			title="gracias - quieto"
+			description="Recibimos tu mensaje. Estamos un paso más cerca de hacer algo increíble juntos, pronto vamos a responderte."
+			openGraph={{
+				basic: {
+					title: "gracias - quieto",
+					type: "website",
+					image: "/media/images/logoimage.png",
+				},
+			}}
+			extend={{
+				link: [{ rel: "icon", href: "/favicon.svg" }],
+			}}
+		/>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>gracias - quieto</title>
+	</head>
+	<body class="bg-tint-500 selection:bg-water-500 selection:text-foam-50">
+		<Header background="dark" />
+		<main class="min-h-svh box-border flex flex-col justify-center pt-28 pb-16">
+			<div
+				class="mx-auto w-full max-w-content box-border grid grid-cols-2 items-center gap-24 px-content-x max-mobile:grid-cols-1 max-mobile:gap-10 max-mobile:text-center"
+			>
+				<div class="max-w-narrow max-mobile:mx-auto">
+					<h1
+						class="thanks-title relative m-0 inline-block font-display font-normal text-thanks-title leading-none tracking-tight text-foam-500"
+					>
+						<span class="thanks-echo thanks-echo-1" aria-hidden="true">Gracias</span>
+						<span class="thanks-echo thanks-echo-2" aria-hidden="true">Gracias</span>
+						<span class="thanks-echo thanks-echo-3" aria-hidden="true">Gracias</span>
+						<span class="thanks-solid">Gracias</span>
+					</h1>
+
+					<div class="thanks-fade flex flex-col gap-8 max-mobile:mx-auto">
+						<p class="m-0 text-lg leading-relaxed text-fog-500 text-pretty">
+							Recibimos tu mensaje. Estamos un paso más cerca de hacer algo increíble juntos, nuestro equipo va a
+							estar respondiéndote en breve.
+						</p>
+						<a
+							href="/"
+							class="w-fit text-md font-medium text-foam-500 underline underline-offset-5 decoration-1 transition-colors duration-400 ease-in-out hover:text-water-500 max-mobile:mx-auto"
+						>
+							Volver al inicio
+						</a>
+					</div>
+				</div>
+
+				<div class="relative overflow-hidden rounded-xs aspect-4/5 w-full max-mobile:max-w-narrow max-mobile:mx-auto">
+					<img
+						src="/media/images/quietomockup.webp"
+						alt="Quieto mockup"
+						class="block h-full rounded-3xl w-full object-cover"
+					/>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
+
+<style>
+	.thanks-echo {
+		position: absolute;
+		left: 0;
+		white-space: nowrap;
+		color: transparent;
+		user-select: none;
+		animation: thanks-echo-in 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+	}
+	.thanks-echo-1 {
+		top: 0.39em;
+		-webkit-text-stroke: 1px var(--color-tint-300);
+		animation-delay: 0.36s;
+	}
+	.thanks-echo-2 {
+		top: 0.26em;
+		-webkit-text-stroke: 1px var(--color-fog-700);
+		animation-delay: 0.24s;
+	}
+	.thanks-echo-3 {
+		top: 0.13em;
+		-webkit-text-stroke: 1.5px var(--color-water-500);
+		animation-delay: 0.12s;
+	}
+	.thanks-solid {
+		position: relative;
+		display: inline-block;
+		margin-bottom: 0.39em;
+		animation: thanks-echo-in 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+	}
+	.thanks-fade {
+		animation: thanks-fade-in 0.8s 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+	}
+
+	@keyframes thanks-echo-in {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@keyframes thanks-fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.thanks-echo,
+		.thanks-solid,
+		.thanks-fade {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+	}
+</style>
