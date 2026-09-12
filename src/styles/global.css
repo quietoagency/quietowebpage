@@ -6,3 +6,21 @@
 @import "./tokens/typography.css";
 @import "./tokens/spacing.css";
 @import "./tokens/motion.css";
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-fog-500);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-tint-500) inset;
+  box-shadow: 0 0 0px 1000px var(--color-tint-500) inset;
+  caret-color: var(--color-fog-500);
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input:autofill,
+textarea:autofill {
+  background-color: var(--color-tint-500);
+  color: var(--color-fog-500);
+}

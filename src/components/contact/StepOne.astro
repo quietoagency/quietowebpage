@@ -1,0 +1,83 @@
+---
+---
+
+<form id="step-one-form" class="w-full max-w-250">
+  <h1 class="text-fog-500 text-6xl pb-6">Sobre vos y tu proyecto</h1>
+	<div class="grid grid-cols-2 gap-16 max-mobile:grid-cols-1">
+		<div class="flex flex-col gap-6">
+			<label for="name" class="m-0 text-h3 font-bold text-foam-500">¿Cuál es tu nombre?</label>
+			<div class="flex flex-col gap-1">
+				<input
+					type="text"
+					id="name"
+					name="name"
+					placeholder="Tu nombre"
+					required
+					class="w-full border-0 border-b-2 border-fog-500 bg-transparent py-4 font-sans text-md text-fog-500 placeholder:text-fog-500 transition-colors duration-400 ease-in-out focus:border-water-500 focus:outline-none"
+				/>
+				<span data-error-for="name" class="text-sm text-red-400"></span>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-6">
+			<label for="email" class="m-0 text-h3 font-bold text-foam-500">¿Cuál es tu correo?</label>
+			<div class="flex flex-col gap-1">
+				<input
+					type="email"
+					id="email"
+					name="email"
+					placeholder="tu@correo.com"
+					required
+					class="w-full border-0 border-b-2 border-fog-500 bg-transparent py-4 font-sans text-md text-fog-500 placeholder:text-fog-500 transition-colors duration-400 ease-in-out focus:border-water-500 focus:outline-none"
+				/>
+				<span data-error-for="email" class="text-sm text-red-400"></span>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-6">
+			<label for="companyName" class="m-0 text-h3 font-bold text-foam-500">¿Cuál es tu compañía?</label>
+			<div class="flex flex-col gap-1">
+				<input
+					type="text"
+					id="companyName"
+					name="companyName"
+					placeholder="Nombre de la empresa"
+					required
+					class="w-full border-0 border-b-2 border-fog-500 bg-transparent py-4 font-sans text-md text-fog-500 placeholder:text-fog-500 transition-colors duration-400 ease-in-out focus:border-water-500 focus:outline-none"
+				/>
+				<span data-error-for="companyName" class="text-sm text-red-400"></span>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-6">
+			<label for="phone" class="m-0 text-h3 font-bold text-foam-500">¿Cuál es tu teléfono?</label>
+			<div class="flex flex-col gap-1">
+				<input
+					type="tel"
+					id="phone"
+					name="phone"
+					placeholder="+54 11 ..."
+					class="w-full border-0 border-b-2 border-fog-500 bg-transparent py-4 font-sans text-md text-fog-500 placeholder:text-fog-500 transition-colors duration-400 ease-in-out focus:border-water-500 focus:outline-none"
+				/>
+				<span data-error-for="phone" class="text-sm text-red-400"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-16 flex gap-6">
+		<button
+			type="button"
+			id="step-one-back"
+			class="h-13.5 w-75 flex-1 rounded-xs border border-water-500 bg-water-500 font-sans text-md text-white transition-all duration-400 ease-in-out hover:opacity-90"
+		>
+			Atras
+		</button>
+		<button
+			id="next"
+			type="submit"
+			class="h-13.5 w-75 flex-1 rounded-xs border border-water-500 bg-water-500 font-sans text-md text-white transition-all duration-400 ease-in-out hover:opacity-90"
+		>
+			Siguiente
+		</button>
+	</div>
+</form>
