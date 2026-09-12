@@ -91,6 +91,8 @@ import StepTwo from "../components/contact/StepTwo.astro";
 	const stepOneBack = document.getElementById("step-one-back")
 	const stepTwoBack = document.getElementById("step-two-back")
 
+	let stepOneValues: ReturnType<typeof StepOneSchema.parse> | null = null
+
 	function fadeStep(el: HTMLElement, direction: "normal" | "reverse", onDone?: () => void) {
 		el.style.animationDirection = direction
 		el.classList.remove("animate-contact-fade")
@@ -145,10 +147,12 @@ import StepTwo from "../components/contact/StepTwo.astro";
 			return
 		}
 
+		stepOneValues = result.data
+
 		hideStep(stepOne, () => showStep(stepTwo))
 	})
 
-	stepTwoForm?.addEventListener("submit", (e) => {
+	stepTwoForm?.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		const data = new FormData(stepTwoForm)
 		const values = Object.fromEntries(data)
@@ -156,11 +160,30 @@ import StepTwo from "../components/contact/StepTwo.astro";
 
 		clearFieldErrors(stepTwoForm)
 
-		window.location.href = "/thanks"
-
 		if (!result.success) {
 			showFieldErrors(stepTwoForm, result.error.flatten().fieldErrors)
 			return;
+		}
+
+		if (!stepOneValues) return
+
+		const submitButton = stepTwoForm.querySelector('button[type="submit"]') as HTMLButtonElement
+		if (submitButton) submitButton.disabled = true
+
+		try {
+			const response = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ ...stepOneValues, ...result.data }),
+			})
+
+			if (!response.ok) throw new Error("No se pudo enviar el mensaje")
+
+			window.location.href = "/thanks"
+		} catch (error) {
+			console.error(error)
+			alert("Hubo un error al enviar tu mensaje. Por favor intentá de nuevo.")
+			if (submitButton) submitButton.disabled = false
 		}
 	})
 
