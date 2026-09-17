@@ -20,6 +20,7 @@
   --spacing-section-y-lg: clamp(96px, 15vh, 200px);
   --spacing-services-gap: clamp(32px, 4vw, 64px);
   --grid-template-columns-services: repeat(auto-fit, minmax(260px, 1fr));
+  --grid-template-columns-services-hero: minmax(0, 1fr) minmax(0, 1.6fr);
 
   --spacing-work-gap: clamp(32px, 4vw, 56px);
 

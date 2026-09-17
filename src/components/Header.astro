@@ -15,36 +15,23 @@ const baseBarClass = background === "dark" ? "bg-foam-500" : "bg-tint-500";
     data-nav-theme={background}
     class="flex items-center justify-between mx-auto w-full max-w-content box-border border border-transparent py-7 px-content-x opacity-95 transition-all duration-calm ease-in-out motion-reduce:transition-none"
   >
-    <Logo withWordmark background={background} />
+    <a href="/">
+      <Logo withWordmark background={background} />
+    </a>
     <div id="q-nav-links" class="flex gap-nav-gap text-sm font-medium max-mobile:hidden">
       <a
-<<<<<<< HEAD
-        href="#services"
-        class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
-        >servicios</a
-      >
-      <a
-        href="#work"
-        class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
-        >trabajo</a
-      >
-      <a
-        href="#contact"
-        class="text-tint-500 underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline"
-=======
-        href="#servicios"
+        href="/services"
         class={`${baseTextClass} underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline`}
         >servicios</a
       >
       <a
-        href="#trabajo"
+        href="/work"
         class={`${baseTextClass} underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline`}
         >trabajo</a
       >
       <a
         href="/contact"
         class={`${baseTextClass} underline-offset-5 transition-colors duration-calm ease-in-out hover:text-water-500 hover:underline`}
->>>>>>> develop
         >contacto</a
       >
     </div>

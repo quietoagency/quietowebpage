@@ -20,6 +20,7 @@
   --leading-manifesto-statement: 1.18;
 
   --text-service-title: clamp(22px, 2vw, 28px);
+  --text-services-select: clamp(40px, 5.6vw, 76px);
   --tracking-eyebrow: 0.12em;
 
   --text-footer-email: clamp(17px, 1.6vw, 21px);

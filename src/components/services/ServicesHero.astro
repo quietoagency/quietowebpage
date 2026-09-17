@@ -1,0 +1,76 @@
+---
+interface Props {
+  services: { title: string }[];
+}
+const { services } = Astro.props;
+---
+
+<section id="services-hero" class="relative box-border flex min-h-svh flex-col overflow-hidden">
+  <video
+    src="/media/video/herovideo.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute inset-0 h-full w-full object-cover object-center"
+  />
+  <div class="absolute inset-0 bg-tint-950/85"></div>
+  <div
+    id="services-hero-spotlight"
+    class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-400 ease-out"
+    style="background: radial-gradient(100px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255,255,255,0.35), transparent 70%); mix-blend-mode: screen;"
+  >
+  </div>
+
+  <div class="relative z-10 mx-auto box-border flex w-full max-w-content flex-1 flex-col px-content-x">
+    <div class="grid flex-1 grid-cols-services-hero items-end gap-services-gap pt-28 pb-14 max-mobile:grid-cols-1 max-mobile:gap-10">
+      <div class="max-mobile:order-2">
+        <a
+          href="/contact"
+          class="inline-block rounded-xs bg-water-500 px-7 py-3.5 text-sm font-medium text-foam-50 transition-colors duration-400 ease-in-out hover:bg-water-600"
+        >
+          Hablemos
+        </a>
+      </div>
+      <div class="flex flex-col items-end gap-2 text-right max-mobile:order-1 max-mobile:items-start max-mobile:text-left">
+        {
+          services.map((s, i) => (
+            <div
+              data-service-reveal
+              style={`transition-delay:${(0.1 + i * 0.15).toFixed(2)}s`}
+              class="translate-y-3 opacity-0 transition duration-500 ease-out"
+            >
+              <button
+                type="button"
+                data-service-trigger
+                data-index={i}
+                aria-pressed="false"
+                class="cursor-pointer border-0 bg-transparent p-0 font-display font-normal text-services-select leading-tight text-fog-500 transition-colors duration-400 ease-in-out hover:text-foam-500"
+              >
+                {s.title}
+              </button>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const hero = document.getElementById("services-hero");
+  const spotlight = document.getElementById("services-hero-spotlight");
+
+  if (hero && spotlight) {
+    hero.addEventListener("pointermove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      spotlight.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+      spotlight.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+      spotlight.style.opacity = "1";
+    });
+
+    hero.addEventListener("pointerleave", () => {
+      spotlight.style.opacity = "0";
+    });
+  }
+</script>

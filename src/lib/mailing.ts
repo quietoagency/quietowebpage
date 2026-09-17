@@ -2,7 +2,6 @@ import { Resend } from "resend";
 import { referalOptions } from "./constants";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY)
-console.log(resend)
 
 interface LeadData {
   name: string;

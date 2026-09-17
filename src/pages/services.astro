@@ -1,0 +1,180 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ServicesHero from "../components/services/ServicesHero.astro";
+import ServicesPanel from "../components/services/ServicesPanel.astro";
+import { SEO } from "astro-seo";
+
+const services = [
+  {
+    title: "diseño de marca digital",
+    lead: "Identidad visual completa: símbolo, tipografía, color y las reglas para usarlos bien.",
+    items: [
+      { t: "Escucha y criterio", d: "Entendemos el negocio y acordamos qué es «bien hecho» antes de dibujar nada." },
+      { t: "Símbolo y wordmark", d: "Una propuesta terminada, no tres a medias. Se muestra cuando está lista." },
+      { t: "Sistema", d: "Paleta, tipografía, espaciado y usos. Lo que hace que la marca se sostenga sola." },
+      { t: "Manual", d: "Documentación clara para que quede en buenas manos." },
+    ],
+  },
+  {
+    title: "diseño y desarrollo web",
+    lead: "Sitios diseñados y construidos por el mismo equipo, del primer boceto al deploy.",
+    items: [
+      { t: "Estructura", d: "Qué tiene que lograr el sitio y en qué orden se cuenta." },
+      { t: "Diseño", d: "Una columna de lectura, aire generoso, imágenes grandes y quietas." },
+      { t: "Desarrollo", d: "Fiel al diseño, probado en dispositivos reales." },
+      { t: "Publicación", d: "Salida acompañada, con dominio, hosting y métricas en orden." },
+    ],
+  },
+  {
+    title: "mantenimiento y evolución",
+    lead: "Acompañamos el sitio después del lanzamiento: mejoras, contenido y soporte técnico.",
+    items: [
+      { t: "Contenido", d: "Cargamos y ajustamos lo nuevo sin romper lo que ya funciona." },
+      { t: "Mejoras", d: "Cambios pequeños y frecuentes, decididos con datos y no por apuro." },
+      { t: "Soporte", d: "Respondemos en horario laboral, sin promesas de 24/7." },
+    ],
+  },
+];
+---
+
+<html lang="es" class="scroll-smooth">
+  <head>
+    <SEO
+      title="servicios - quieto"
+      description="Diseño de marca, diseño y desarrollo web, y mantenimiento y evolución. Así trabajamos en quieto."
+      openGraph={{
+        basic: {
+          title: "servicios - quieto",
+          type: "website",
+          image: "/media/images/logoimage.png",
+        },
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+      }}
+    />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>servicios - quieto</title>
+  </head>
+  <body class="bg-foam-500 selection:bg-water-500 selection:text-foam-50">
+    <Header background="dark" />
+
+    <ServicesHero services={services} />
+
+    <ServicesPanel services={services} />
+
+    <Footer />
+  </body>
+</html>
+
+<script>
+  const triggers = [...document.querySelectorAll<HTMLButtonElement>("[data-service-trigger]")];
+  const detail = document.getElementById("services-detail");
+  const panels = [...document.querySelectorAll<HTMLElement>("[data-panel]")];
+  const heroReveals = [...document.querySelectorAll<HTMLElement>("[data-service-reveal]")];
+  const footer = document.querySelector<HTMLElement>("footer");
+
+  const REVEAL_HIDDEN = ["opacity-0", "translate-y-3"];
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (detail && panels.length && triggers.length && footer) {
+    let activeIndex = -1;
+    let locked = false;
+    let lastY = window.scrollY;
+    let lockTimeout: ReturnType<typeof setTimeout>;
+
+    document.body.classList.add("overflow-hidden");
+
+    const getDetailTop = () => detail.getBoundingClientRect().top + window.scrollY;
+    const getFooterTop = () => footer.getBoundingClientRect().top + window.scrollY;
+
+    const scrollToTarget = (y: number) => {
+      locked = true;
+      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      clearTimeout(lockTimeout);
+      lockTimeout = setTimeout(() => {
+        locked = false;
+        lastY = window.scrollY;
+      }, 900);
+    };
+
+    const reveal = (el: HTMLElement) => {
+      el.classList.remove(...REVEAL_HIDDEN);
+    };
+
+    const resetReveal = (el: HTMLElement) => {
+      el.classList.add(...REVEAL_HIDDEN);
+      void el.offsetWidth;
+    };
+
+    const openService = (i: number) => {
+      if (i === activeIndex) return;
+
+      const previousPanel = panels[activeIndex];
+      if (previousPanel) {
+        previousPanel.querySelectorAll<HTMLElement>("[data-reveal]").forEach(resetReveal);
+      }
+
+      activeIndex = i;
+
+      triggers.forEach((btn, idx) => {
+        const isActive = idx === i;
+        btn.classList.toggle("text-foam-500", isActive);
+        btn.classList.toggle("text-fog-500", !isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+
+      panels.forEach((panel, idx) => {
+        panel.hidden = idx !== i;
+      });
+      detail.hidden = false;
+      document.body.classList.remove("overflow-hidden");
+
+      requestAnimationFrame(() => {
+        panels[i]?.querySelectorAll<HTMLElement>("[data-reveal]").forEach(reveal);
+      });
+
+      scrollToTarget(getDetailTop());
+    };
+
+    triggers.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const index = Number(btn.dataset.index);
+        openService(index);
+      });
+    });
+
+    requestAnimationFrame(() => heroReveals.forEach(reveal));
+
+    if (!prefersReducedMotion) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (locked || activeIndex === -1) return;
+
+          const y = window.scrollY;
+          const up = y < lastY;
+          lastY = y;
+
+          // Tres pantallas completas ancladas: hero (0), detalle (detailTop) y footer (footerTop).
+          // Mientras no se llegó al footer, cualquier scroll salta al borde de pantalla más cercano
+          // en la dirección del gesto, en vez de dejar avanzar el scroll nativo a medio camino.
+          const snapPoints = [0, getDetailTop(), getFooterTop()];
+          if (y >= snapPoints[snapPoints.length - 1]) return; // ya adentro del footer: scroll libre
+
+          const zoneStart = [...snapPoints].reverse().find((point) => point <= y) ?? 0;
+          const zoneEnd = snapPoints.find((point) => point > y) ?? snapPoints[snapPoints.length - 1];
+
+          scrollToTarget(up ? zoneStart : zoneEnd);
+        },
+        { passive: true },
+      );
+    }
+  }
+</script>
