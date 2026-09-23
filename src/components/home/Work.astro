@@ -1,46 +1,80 @@
 ---
-import Eyebrow from "../ui/Eyebrow.astro";
-import WorkCard from "../ui/WorkCard.astro";
-
-const proyects = [
-  { client: "Cliente A", context: "Identidad y sitio para estudio de arquitectura." },
-  { client: "Cliente B", context: "E-commerce para marca de cerámica artesanal." },
-];
+import { projects } from "../../lib/constants";
 ---
 
-<section id="work">
-  <div
-    id="q-work-inner"
-    class="mx-auto max-w-content box-border px-content-x sm:py-section-y-lg transition-all duration-1000 ease-in-out motion-reduce:transition-none"
-  >
-    <Eyebrow>Trabajo</Eyebrow>
-    <div
-      id="q-work-grid"
-      class="grid pb-10 sm:pb-0 grid-cols-2 max-mobile:grid-cols-1 gap-work-gap transition-all duration-1000 ease-in-out motion-reduce:transition-none"
-    >
-      {proyects.map((p) => <WorkCard key={p.client} client={p.client} context={p.context} />)}
+<section id="work" class="box-border w-full px-10 py-section-y-lg max-mobile:py-16">
+  <div class="grid grid-cols-2 gap-services-gap max-mobile:grid-cols-1 max-mobile:gap-10">
+    <div class="relative aspect-4/3 overflow-hidden rounded-xs bg-fog-200 max-mobile:aspect-16/10">
+      {
+        projects.map((p, i) => (
+          <img
+            data-work-image
+            src={p.image}
+            alt={p.client}
+            loading={i === 0 ? "eager" : "lazy"}
+            class:list={[
+              "absolute inset-0 block h-full w-full object-cover transition-opacity duration-700 ease-in-out motion-reduce:transition-none",
+              i === 0 ? "opacity-100" : "opacity-0",
+            ]}
+          />
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col justify-center max-mobile:justify-start">
+      <h2 class="m-0 mb-12 text-pretty font-sans text-h2 font-semibold leading-tight text-tint-500 max-mobile:mb-8">
+        Casos de éxito.
+      </h2>
+
+      <div data-work-list class="flex flex-col">
+        {
+          projects.map((p, i) => (
+            <a
+              href="/work"
+              data-work-item
+              data-active={i === 0 ? "" : undefined}
+              class="group/work block border-b border-fog-300 no-underline"
+            >
+              <div class="flex items-baseline gap-6 py-6.5">
+                <span class="grow font-sans text-lg font-medium text-tint-500 transition-colors duration-400 ease-in-out group-data-active/work:text-water-500">
+                  {p.client}
+                </span>
+                <span class="font-sans text-sm text-fog-700">{p.context}</span>
+              </div>
+              <div class="grid grid-rows-[0fr] transition-all duration-500 ease-out group-data-active/work:grid-rows-[1fr] max-mobile:grid-rows-[1fr] motion-reduce:transition-none">
+                <div class="overflow-hidden">
+                  <p class="m-0 max-w-[42ch] text-pretty pb-7.5 font-sans text-sm leading-relaxed text-fog-700">
+                    {p.text}
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  const inner = document.getElementById("q-work-inner");
-  const grid = document.getElementById("q-work-grid");
+  const list = document.querySelector<HTMLElement>("[data-work-list]");
+  const items = [...document.querySelectorAll<HTMLAnchorElement>("[data-work-item]")];
+  const images = [...document.querySelectorAll<HTMLImageElement>("[data-work-image]")];
 
-  if (inner && grid) {
-    const FULL_INNER = ["max-w-full", "px-7.5", "max-mobile:px-4"];
-    const BASE_INNER = ["max-w-content", "px-content-x"];
-    const FULL_GRID = ["gap-3"];
-    const BASE_GRID = ["gap-work-gap"];
-
-    const setFull = (on: boolean) => {
-      inner.classList.remove(...(on ? BASE_INNER : FULL_INNER));
-      inner.classList.add(...(on ? FULL_INNER : BASE_INNER));
-      grid.classList.remove(...(on ? BASE_GRID : FULL_GRID));
-      grid.classList.add(...(on ? FULL_GRID : BASE_GRID));
+  if (list && items.length && images.length) {
+    const setActive = (index: number) => {
+      items.forEach((item, i) => item.toggleAttribute("data-active", i === index));
+      images.forEach((img, i) => {
+        img.classList.toggle("opacity-100", i === index);
+        img.classList.toggle("opacity-0", i !== index);
+      });
     };
 
-    const observer = new IntersectionObserver(([entry]) => setFull(entry.isIntersecting), { threshold: 0.35 });
-    observer.observe(inner);
+    items.forEach((item, i) => {
+      item.addEventListener("mouseenter", () => setActive(i));
+      item.addEventListener("focus", () => setActive(i));
+    });
+
+    list.addEventListener("mouseleave", () => setActive(0));
   }
 </script>
