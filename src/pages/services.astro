@@ -5,38 +5,7 @@ import Footer from "../components/Footer.astro";
 import ServicesHero from "../components/services/ServicesHero.astro";
 import ServicesPanel from "../components/services/ServicesPanel.astro";
 import { SEO } from "astro-seo";
-
-const services = [
-  {
-    title: "diseño de marca digital",
-    lead: "Identidad visual completa: símbolo, tipografía, color y las reglas para usarlos bien.",
-    items: [
-      { t: "Escucha y criterio", d: "Entendemos el negocio y acordamos qué es «bien hecho» antes de dibujar nada." },
-      { t: "Símbolo y wordmark", d: "Una propuesta terminada, no tres a medias. Se muestra cuando está lista." },
-      { t: "Sistema", d: "Paleta, tipografía, espaciado y usos. Lo que hace que la marca se sostenga sola." },
-      { t: "Manual", d: "Documentación clara para que quede en buenas manos." },
-    ],
-  },
-  {
-    title: "diseño y desarrollo web",
-    lead: "Sitios diseñados y construidos por el mismo equipo, del primer boceto al deploy.",
-    items: [
-      { t: "Estructura", d: "Qué tiene que lograr el sitio y en qué orden se cuenta." },
-      { t: "Diseño", d: "Una columna de lectura, aire generoso, imágenes grandes y quietas." },
-      { t: "Desarrollo", d: "Fiel al diseño, probado en dispositivos reales." },
-      { t: "Publicación", d: "Salida acompañada, con dominio, hosting y métricas en orden." },
-    ],
-  },
-  {
-    title: "mantenimiento y evolución",
-    lead: "Acompañamos el sitio después del lanzamiento: mejoras, contenido y soporte técnico.",
-    items: [
-      { t: "Contenido", d: "Cargamos y ajustamos lo nuevo sin romper lo que ya funciona." },
-      { t: "Mejoras", d: "Cambios pequeños y frecuentes, decididos con datos y no por apuro." },
-      { t: "Soporte", d: "Respondemos en horario laboral, sin promesas de 24/7." },
-    ],
-  },
-];
+import { services } from "../lib/constants";
 ---
 
 <html lang="es" class="scroll-smooth">
@@ -126,7 +95,7 @@ const services = [
       triggers.forEach((btn, idx) => {
         const isActive = idx === i;
         btn.classList.toggle("text-foam-500", isActive);
-        btn.classList.toggle("text-fog-500", !isActive);
+        btn.classList.toggle("text-fog-700", !isActive);
         btn.setAttribute("aria-pressed", String(isActive));
       });
 
@@ -161,12 +130,8 @@ const services = [
           const y = window.scrollY;
           const up = y < lastY;
           lastY = y;
-
-          // Tres pantallas completas ancladas: hero (0), detalle (detailTop) y footer (footerTop).
-          // Mientras no se llegó al footer, cualquier scroll salta al borde de pantalla más cercano
-          // en la dirección del gesto, en vez de dejar avanzar el scroll nativo a medio camino.
           const snapPoints = [0, getDetailTop(), getFooterTop()];
-          if (y >= snapPoints[snapPoints.length - 1]) return; // ya adentro del footer: scroll libre
+          if (y >= snapPoints[snapPoints.length - 1]) return;
 
           const zoneStart = [...snapPoints].reverse().find((point) => point <= y) ?? 0;
           const zoneEnd = snapPoints.find((point) => point > y) ?? snapPoints[snapPoints.length - 1];

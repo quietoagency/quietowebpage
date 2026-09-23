@@ -27,7 +27,7 @@ const { services } = Astro.props;
           <div
             data-reveal
             style="transition-delay:0.05s"
-            class="translate-y-3 text-xs uppercase tracking-eyebrow text-fog-500 opacity-0 transition duration-500 ease-out"
+            class="translate-y-3 text-xs uppercase tracking-eyebrow text-fog-700 opacity-0 transition duration-500 ease-out"
           >
             {String(i + 1).padStart(2, "0")} — {s.title}
           </div>
@@ -49,7 +49,7 @@ const { services } = Astro.props;
                   <span class="w-7 shrink-0 text-xs text-fog-400">{String(j + 1).padStart(2, "0")}</span>
                   <div>
                     <div class="mb-1.5 text-lg font-medium text-tint-500">{it.t}</div>
-                    <p class="m-0 text-sm leading-relaxed text-fog-500">{it.d}</p>
+                    <p class="m-0 text-sm leading-relaxed text-fog-700">{it.d}</p>
                   </div>
                 </div>
               ))}

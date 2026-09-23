@@ -1,0 +1,130 @@
+---
+interface Props {
+  projects: { client: string; context: string; text: string; image: string }[];
+}
+const { projects } = Astro.props;
+---
+
+<section id="trabajo" class="mx-auto max-w-content box-border px-content-x pt-36 pb-section-y-lg max-mobile:pb-16">
+  <div class="grid grid-cols-2 gap-services-gap max-mobile:grid-cols-1 max-mobile:gap-10">
+    <div class="flex flex-col gap-12">
+      <h1 class="m-0 text-pretty font-display text-h1 font-normal leading-tight text-tint-500">
+        Nuestro trabajo.
+      </h1>
+      <div class="relative h-140 w-full overflow-hidden rounded-xs bg-fog-200 max-mobile:h-72">
+        {
+          projects.map((p, i) => (
+            <img
+              data-work-image
+              src={p.image}
+              alt={p.client}
+              loading={i === 0 ? "eager" : "lazy"}
+              class:list={[
+                "absolute inset-0 block h-full w-full object-cover transition-opacity duration-700 ease-in-out motion-reduce:transition-none",
+                i === 0 ? "opacity-100" : "opacity-0",
+              ]}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div data-work-list class="flex flex-col border-t border-fog-300">
+      {
+        projects.map((p, i) => (
+          <div class="border-b border-fog-300">
+            <button
+              type="button"
+              data-work-item
+              data-index={i}
+              aria-expanded="false"
+              class="flex w-full items-baseline gap-6 border-0 bg-transparent py-6.5 text-left cursor-pointer"
+            >
+              <span data-work-name class="grow text-lg font-medium text-tint-500 transition-colors duration-400 ease-in-out">
+                {p.client}
+              </span>
+              <span class="text-sm text-fog-500">{p.context}</span>
+            </button>
+            <p
+              data-work-text
+              hidden
+              class="m-0 max-w-[42ch] text-pretty pb-7.5 text-sm leading-relaxed text-fog-500 opacity-0 translate-y-3 transition duration-500 ease-out motion-reduce:transition-none"
+            >
+              {p.text}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const list = document.querySelector<HTMLElement>("[data-work-list]");
+  const items = [...document.querySelectorAll<HTMLButtonElement>("[data-work-item]")];
+  const images = [...document.querySelectorAll<HTMLImageElement>("[data-work-image]")];
+
+  if (list && items.length && images.length) {
+    const REVEAL_HIDDEN = ["opacity-0", "translate-y-3"];
+    let openIndex: number | null = null;
+    let hoverIndex: number | null = null;
+
+    const nameOf = (btn: HTMLButtonElement) => btn.querySelector<HTMLElement>("[data-work-name]");
+    const textOf = (btn: HTMLButtonElement) => btn.parentElement?.querySelector<HTMLElement>("[data-work-text]") ?? null;
+
+    const updateActiveStyles = () => {
+      const activeIndex = hoverIndex ?? openIndex ?? 0;
+      items.forEach((btn, i) => {
+        const name = nameOf(btn);
+        const isActive = i === activeIndex || i === openIndex;
+        name?.classList.toggle("text-water-500", isActive);
+        name?.classList.toggle("text-tint-500", !isActive);
+      });
+      images.forEach((img, i) => {
+        img.classList.toggle("opacity-100", i === activeIndex);
+        img.classList.toggle("opacity-0", i !== activeIndex);
+      });
+    };
+
+    items.forEach((btn, i) => {
+      btn.addEventListener("mouseenter", () => {
+        hoverIndex = i;
+        updateActiveStyles();
+      });
+
+      btn.addEventListener("click", () => {
+        const wasOpen = openIndex === i;
+
+        if (openIndex !== null) {
+          const prevBtn = items[openIndex];
+          const prevText = textOf(prevBtn);
+          prevBtn.setAttribute("aria-expanded", "false");
+          if (prevText) {
+            prevText.classList.add(...REVEAL_HIDDEN);
+            prevText.hidden = true;
+          }
+        }
+
+        openIndex = wasOpen ? null : i;
+
+        if (!wasOpen) {
+          const text = textOf(btn);
+          btn.setAttribute("aria-expanded", "true");
+          if (text) {
+            text.hidden = false;
+            requestAnimationFrame(() => text.classList.remove(...REVEAL_HIDDEN));
+          }
+        }
+
+        updateActiveStyles();
+      });
+    });
+
+    list.addEventListener("mouseleave", () => {
+      hoverIndex = null;
+      updateActiveStyles();
+    });
+
+    updateActiveStyles();
+  }
+</script>
